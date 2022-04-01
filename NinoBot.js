@@ -1,4 +1,4 @@
-console.clear();
+// console.clear();
 const colors = require('colors');
 const { DisTube } = require('distube')
 const { Client, Collection, Intents, MessageEmbed } = require('discord.js');
@@ -17,17 +17,11 @@ client.distube = new DisTube(client, {
     emitAddListWhenCreatingQueue: false,
     nsfw: true,
     plugins: [
-    //   new SpotifyPlugin({
-    //     emitEventsAfterFetching: true
-    //   }),
-    //   new SoundCloudPlugin(),
       new YtDlpPlugin()
     ],
     youtubeDL: false
 })
 
-// const status = queue =>
-//     `Volume: \`${queue.volume}%\` | Filter: \`${queue.filters.join(', ') || 'Off'}\` | Loop: \`${queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'}\` | Autoplay: \`${queue.autoplay ? 'On' : 'Off'}\``
 client.distube
     .on('playSong', (queue, song) =>{
         setTimeout(() => {
@@ -36,12 +30,6 @@ client.distube
             })
         }), 10000
     })
-
-
-
-
-
-
 module.exports = client;
 client.db = db;
 client.config = require('./Settings/Configuration/config.js');
@@ -53,3 +41,6 @@ client.slashcommands = new Collection();
 ['command_Handler', 'event_Handler', 'slash_Handler'].forEach(handler => {
 	require(`./Handlers/${handler}`)(client);
 });
+
+
+client.login(client.config.bot.clientToken)
