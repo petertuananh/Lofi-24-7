@@ -13,7 +13,7 @@ module.exports = {
             .setDescription('・Pinging...')
             .setColor(client.config.general.successID);
 
-        const msg = await interaction.followUp({
+        const msg = await interaction.reply({
             embeds: [embed]
         });
 

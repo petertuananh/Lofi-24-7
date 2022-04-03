@@ -1,8 +1,10 @@
-// console.clear();
 const colors = require('colors');
 const { DisTube } = require('distube')
 const { Client, Collection, Intents, MessageEmbed } = require('discord.js');
 const db = require('quick.db');
+const fs = require('fs');
+const { SpotifyPlugin } = require('@distube/spotify')
+const { SoundCloudPlugin } = require('@distube/soundcloud')
 const { YtDlpPlugin } = require('@distube/yt-dlp')
 const client = new Client({
     intents: 32767,
@@ -17,8 +19,12 @@ client.distube = new DisTube(client, {
     emitAddListWhenCreatingQueue: false,
     nsfw: true,
     plugins: [
-      new YtDlpPlugin()
-    ],
+        new SpotifyPlugin({
+          emitEventsAfterFetching: true
+        }),
+        new SoundCloudPlugin(),
+        new YtDlpPlugin()
+      ],
     youtubeDL: false
 })
 
@@ -26,7 +32,11 @@ client.distube
     .on('playSong', (queue, song) =>{
         setTimeout(() => {
             client.on('voiceStateUpdate', (user) => {
-                user.setSuppressed(false).catch(e=>{return})
+                if (user.id == client.user.id){
+                    // if (user.channel.type == 'GUILD_STAGE_VOICE'){
+                        user.guild.me.voice.setSuppressed(false).catch(e=>{return})
+                    // }
+                }
             })
         }), 10000
     })
@@ -37,10 +47,11 @@ client.emoji = require('./Settings/Configuration/emojis.js');
 client.commands = new Collection();
 client.aliases = new Collection();
 client.slashcommands = new Collection();
-
+/*
 ['command_Handler', 'event_Handler', 'slash_Handler'].forEach(handler => {
 	require(`./Handlers/${handler}`)(client);
 });
-
-
-client.login(client.config.bot.clientToken)
+*/
+const res = fs.readdirSync('./Handlers');
+res.map(name => require(`./Handlers/${name}`)(client));
+client.login(client.config.bot.clientToken).catch(e=>{return console.log(e)})

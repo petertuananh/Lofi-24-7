@@ -13,10 +13,6 @@ module.exports.run = async (client, interaction) => {
     }
 
     if (interaction.isCommand() || interaction.isContextMenu()) {
-        // await interaction.deferReply({
-        //     ephemeral: false
-        // }).catch(() => {});
-
         const command = client.slashcommands.get(interaction.commandName);
 
         embed.setDescription('**・An error occured while running this command ✖**')
@@ -35,25 +31,18 @@ module.exports.run = async (client, interaction) => {
             } else if (option.value) args.push(option.value);
         }
 
-        const upEmbed = new MessageEmbed()
-            .setColor('#3d35cc')
-            .setThumbnail(client.user.displayAvatarURL())
-            .setDescription("You're missing permission!")
-            .addField("You need", `\`${command.UserPerms || []}\``)
-            .setTimestamp()
-
-        const bpEmbed = new MessageEmbed()
-            .setColor('#3d35cc')
-            .setThumbnail(client.user.displayAvatarURL())
-            .setDescription("Bot is missing permission!")
-            .addField("Bot need:", `\`${command.BotPerms || []}\``)
-            .setTimestamp()
-        if (!interaction.guild.me.permissions.has(command.BotPerms || [])) return interaction.reply({
-            embeds: [bpEmbed]
-        })
-        if (!interaction.member.permissions.has(command.UserPerms || [])) return interaction.reply({
-            embeds: [upEmbed]
-        })
+        const embedPerm = new MessageEmbed()
+        .setTitle(`${client.emoji.music} ${client.user.username}`)
+        .setColor(client.config.general.embedColor)
+        .setDescription(`> ${client.emoji.deny} You are not allow to use this command!`)
+        if (command.Perm){
+            const checked = await client.db.get(`everyone-${interaction.guild.id}`)
+            if(!checked){
+                if(!interaction.member.permissions.has("MANAGE_GUILD")){
+                    return interaction.reply({embeds: [embedPerm]})
+                }
+            }
+        }
         if (command.ownerOnly) {
             if (interaction.member.id !== client.config.general.ownerID) {
                 embed.setDescription(`**・Limited this commands to owners only**`)

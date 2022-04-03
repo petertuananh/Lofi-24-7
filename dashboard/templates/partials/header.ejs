@@ -1,0 +1,170 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %>
+  </title>
+  <link href="/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div style="display: none;" class="phone-navbar">
+      <div class="avatar-bot">
+        <img src="" alt="">
+        <a href=""></a>
+      </div>
+      <div class="navphone">
+       <ul class="navphone__list"> 
+        <li>
+          <i class="fa fa-home"></i>
+          <a class="text-white" href="/">Home</a>
+        </li>         
+        <li>
+          <i class="fa fa-pencil"></i>
+          <a class="text-white" href="/dashboard">Dashboard</a>
+        </li>
+        <li>
+            <i class="fa fa-circle"></i>
+            <a class="text-white" href="/status">Status</a>
+        </li>        
+        <li>
+          <i class="fa fa-coins"></i>
+          <a class="text-white" href="/userinfo">User</a>
+        </li>
+        
+       </ul>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse " id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <% if (user) { %>
+          <li class="nav-item myBtn">
+            <span class="nav-link">
+              <i class="fa fa-home"></i>
+              <a class="text-white" href="/">Home</a> 
+            </span>
+          </li>
+
+          <li class="nav-item myBtn fontgeneral">
+            <span class="nav-link fontgeneral">
+              <i class="fa fa-pencil"></i>
+              <a class="text-white" href="/dashboard">Dashboard</a>
+            </span>
+          </li>
+
+          <li class="nav-item myBtn fontgeneral">
+            <span class="nav-link fontgeneral">
+              <i class="fa fa-circle"></i>
+              <a class="text-white" href="/status">Status</a>
+            </span>
+          </li>
+
+
+          <li class="nav-item myBtn fontgeneral">
+            <span class="nav-link fontgeneral">
+              <i class="fa fa-coins"></i>
+              <a class="text-white" href="/userinfo">User</a>
+            </span>
+          </li>
+
+          <li class="nav-item myBtn fontgeneral">
+            <span class="nav-link fontgeneral">
+              <i class="fa fa-arrow-right-from-bracket"></i>
+              <a class="text-white" href="/logout">Logout</a>
+            </span>
+          </li>
+
+          <% } else { %>
+            <li class="nav-item myBtn">
+              <span class="nav-link">
+                <i class="fa fa-home"></i>
+                <a class="text-white" href="/">Home</a> 
+              </span>
+            </li>
+  
+            <li class="nav-item myBtn fontgeneral">
+              <span class="nav-link fontgeneral">
+                <i class="fa fa-pencil"></i>
+                <a class="text-white" href="/dashboard">Dashboard</a>
+              </span>
+            </li>
+  
+            <li class="nav-item myBtn fontgeneral">
+              <span class="nav-link fontgeneral">
+                <i class="fa fa-circle"></i>
+                <a class="text-white" href="/status">Status</a>
+              </span>
+            </li>
+  
+            <% } %>
+        </ul>
+
+        <ul class="navbar-nav">
+          <% if (user) { %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle myBtn text-white" href="#" id="navbarScrollingDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <%= user.username %>#<%= user.discriminator %>
+              </a>
+              <ul class="dropdown-menu" style="background-color: #eb5834;"
+                aria-labelledby="navbarScrollingDropdown">
+                <li>
+                  <span class="dropdown-item">
+                    <i class="fa fa-home"></i>
+                    <a href="/index.ejs">Home</a>
+                </li>
+
+                <li">
+                  <span class="dropdown-item">
+                    <i class="fa fa-pencil"></i>
+                    <a href="/dashboard">Dashboard</a>
+                  </span>
+              </li>
+
+              <li">
+                  <span class="dropdown-item">
+                    <i class="fa fa-circle"></i>
+                    <a href="/status">status</a>
+                  </span>
+              </li>
+
+              <li>
+                <span class="dropdown-item">
+                 <i class="fa fa-book"></i>
+                 <a href="https://docs.yourauth.xyz/">Docs</a>
+              </span>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            
+            <li>
+              <span class="dropdown-item">
+                <i class="fa fa-arrow-right-from-bracket"></i>
+                <a href="/logout">Sign Out</a>
+              </span>
+              </li>
+        </ul>
+        
+        </li>
+        </li>
+        <% } else { %>
+          <li class="nav-item myBtn fontgeneral">
+              <a class="nav-link fontgeneral" href="/login">Login</a>
+          </li>
+          <% } %>
+            </ul>
+      </div>
+    </div>
+  </>

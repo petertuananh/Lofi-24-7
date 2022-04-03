@@ -1,0 +1,48 @@
+<%- include("partials/header", { bot, user,  path, title: `Server list` }) %>
+
+
+
+<% if (bot.db.get(`colormode-${user.id}`) == 'checked') { %>
+
+    <body class="text-white" style="background-color: white; color: #3bed53;">
+  
+  <% } else { %>
+  
+    <body class="text-white" style="background-color: black; color: #3bed53;">
+  
+  <% } %>
+<link rel="stylesheet" href="/style.css">
+<div class="container-sm center" style="margin-top: 30px; color: #3bed53;">
+  <div class="d-grid gap-2 col-4 mx-auto">
+    <h1 style="color: #3bed53;"><%= user.username %></h1>
+    <hr>
+    <div class="ctr-form">
+      <form method="POST">
+        <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;">Theme</p>
+        <p style="font-style: italic;" class="disabled">Choost dashboard theme</p>
+        <label class="switch">
+          <input type="checkbox" name="theme" value="on" <%= bot.db.get(`colormode-${user.id}`) %>>
+          <span class="slider round"></span>
+        </label>
+        <br>
+        <br><button type="submit" class="btn btn-secondary text-white"><i class="fa fa-save"></i> Save Settings</button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+<%- include("partials/footer") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example</title>
+    <style>
+        body{
+            background-color: var(--gray);
+        }
+    </style>
+</head>
+</html>

@@ -1,0 +1,26 @@
+<%- include("partials/header", { bot, path, title: `${bot.user.username}` }) %>
+<body class="text-white" style="background-color: black;"> 
+<link rel="stylesheet" href="/style.css">
+<div class="container-sm center" style="margin: 3rem auto; color: white; ">
+  <div class="d-grid gap-2 col-4 mx-auto" style="display: flex; justify-content: center;">
+    <div style="text-align: center;">
+        <img  style="max-width: 100px; " class="avt" src="<%= bot.user.displayAvatarURL() %>" alt="">
+        <h3><%= bot.user.tag %></h3>
+        <h4>Server: <%= bot.guilds.cache.size %></h4>
+        <h4>User: <%= bot.guilds.cache.map((guild) => guild.memberCount).reduce((p, c) => p + c) %></h4>
+        <br>
+        <div class="btn-section">
+          <span class="btn-section--btn myBtn">
+              <i class="fa-thin fa-plus"></i>
+              <a href="/invite">Invite Me</a>
+          </span>
+          <!-- <br> -->
+          <span class="btn-section--btn myBtn">
+              <i class="fa fa-pencil"></i>
+              <a href="/dashboard">Dashboard</a>
+            </span>
+        </div>
+    </div>
+  </div>
+</div>
+<%- include("partials/footer") %>

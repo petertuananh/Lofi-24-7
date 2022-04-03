@@ -24,8 +24,6 @@ module.exports = {
         const apiLatency = `${message.client.ws.ping - 19} ms`;
 
         embed.setDescription(`・Client Ping : \`${latency}\`\n・API Ping : \`${apiLatency}\``)
-        // embed.setAuthor({ name: 'Ping', iconURL: message.member.user.displayAvatarURL() })
-        // embed.setFooter({ text: `Request by ${message.member.user.username}` , iconURL: message.member.user.displayAvatarURL() })
         msg.edit({
             embeds: [embed]
         });

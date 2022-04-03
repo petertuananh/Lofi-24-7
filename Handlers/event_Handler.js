@@ -22,6 +22,7 @@ module.exports = client => {
 				client.on(pull.event, pull.run.bind(null, client));
 
 				table.addRow(file, 'Success ✔');
+				// delete require cache pls :))
 			} catch (e) {
 				console.log(e);
 				table.addRow(file, `Error while loading event ✖`);

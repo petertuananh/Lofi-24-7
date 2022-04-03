@@ -1,0 +1,99 @@
+<%- include("partials/header", { bot, user, guild,  path, title: `Server list` }) %>
+
+<% if (bot.db.get(`colormode-${user.id}`) == 'checked') { %>
+
+  <body class="text-white" style="background-color: white;">
+
+<% } else { %>
+
+  <body class="text-white" style="background-color: black;">
+
+<% } %>
+<link rel="stylesheet" href="/style.css">
+<div class="container-sm center" style="margin-top: 30px;">
+  <div class="d-grid gap-2 col-4 mx-auto">
+    <% if (alert) { %>
+      <div class="alert alert-success" role="alert">
+        <%= alert %>
+      </div>
+    <% } %>
+    <h1 style="color: white;"><%= guild.name %></h1>
+    <hr>
+    <div class="ctr-form">
+      <form method="POST">
+        <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;">Permissions</p>
+        <p style="font-style: italic;" class="disabled">Allow everyone control <%= bot.user.username %></p>
+        <label class="switch">
+          <input type="checkbox" name="enable" value="on" <%= bot.db.get(`everyone-${guild.id}`) %>>
+          <span class="slider round"></span>
+        </label>
+        <br>
+        <br><button type="submit" class="btn btn-secondary text-white"><i class="fa fa-save"></i> Save Settings</button>
+      </form>
+    </div>
+
+
+    <div class="ctr-form">
+    <form method="POST">
+      <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;">Prefix:</p>
+      <p style="font-style: italic;" class="disabled">Change prefix</p>
+      <input type="text" class="form-control" name="prefix" value="<%= bot.db.get(`prefix-${guild.id}`) %>" placeholder="Your prefix">
+      <br><button type="submit" class="btn btn-secondary text-white"><i class="fa fa-save"></i> Save Settings</button>
+    </form>
+  </div>
+
+
+    <div class="ctr-form">
+    <form method="POST">
+      <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;">Nickname</p>
+      <p style="font-style: italic;" class="disabled">Set bot's nickname</p>
+      <input type="text" class="form-control" name="nickname" value="<%= guild.me.nickname %>" placeholder="Bot's nickname">
+      <br><button type="submit" class="btn btn-secondary text-white"><i class="fa fa-save"></i> Save Settings</button>
+    </form>
+  </div>
+
+    <div class="ctr-form">
+    <form method="POST">
+      <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;">Lofi Live Link</p>
+      <p style="font-style: italic;" class="disabled">Enter lofi music link that bot will play</p>
+      <input type="text" class="form-control" name="link" value="<%= bot.db.get(`link-${guild.id}`) %>" placeholder="https://youtube.com/....">
+      <br><button type="submit" class="btn btn-secondary text-white"><i class="fa fa-save"></i> Save Settings</button>
+    </form>
+  </div>
+
+    <div class="ctr-form">
+    <form method="POST">
+      <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;">Channel</p>
+      <p style="font-style: italic;" class="disabled">Provide a channel ID</p>
+      <input type="text" class="form-control" name="channel" value="<%= bot.db.get(`channel-${guild.id}`) %>" placeholder="Channel ID">
+      <br><button type="submit" class="btn btn-secondary text-white"><i class="fa fa-save"></i> Save Settings</button>
+    </form>
+  </div>
+
+
+    <div class="ctr-form">
+    <form method="POST">
+      <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;">Volume</p>
+      <p style="font-style: italic;" class="disabled">Change volume</p>
+      <input type="text" class="form-control" name="volume" placeholder="Enter a number">
+      <br><button type="submit" class="btn btn-secondary text-white"><i class="fa fa-save"></i> Save Settings</button>
+    </form>
+  </div>
+  </div>
+</div>
+</body>
+<%- include("partials/footer") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example</title>
+    <style>
+        body{
+            background-color: var(--gray);
+        }
+    </style>
+</head>
+</html>
